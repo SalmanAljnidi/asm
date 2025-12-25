@@ -116,7 +116,7 @@
       color:#fff;border:0;
     }
 
-    /* Characters list (kids) */
+    /* Kids list */
     .chars{display:grid;grid-template-columns: repeat(3, 1fr);gap:12px;margin-top:10px}
     @media (max-width: 560px){.chars{grid-template-columns:1fr}}
 
@@ -138,31 +138,18 @@
     }
     .avatar svg{width:56px;height:56px;display:block}
 
-    .meta{
-      display:flex;flex-direction:column;
-      min-width:0;
-      flex:1;
-    }
+    .meta{display:flex;flex-direction:column;min-width:0;flex:1}
 
-    /* FIX الاسماء: خلفية خفيفة للقراءة + منع قص */
+    /* Names readability */
     .nameLine{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      width:fit-content;
-      max-width:100%;
-      padding:6px 10px;
-      border-radius:12px;
-      background: #ffffffd8;
-      border:1px solid rgba(20,40,60,.10);
+      display:inline-flex;align-items:center;gap:8px;
+      width:fit-content;max-width:100%;
+      padding:6px 10px;border-radius:12px;
+      background:#ffffffd8;border:1px solid rgba(20,40,60,.10);
       box-shadow: 0 10px 18px rgba(15,35,55,.06);
     }
     .nm{
-      font-weight:1000;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width:100%;
+      font-weight:1000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
     }
     .mode{
       font-size:12px;color:var(--muted);
@@ -174,12 +161,10 @@
     .divider{height:1px;background:rgba(20,40,60,.10);margin:10px 0}
     .footerNote{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.6}
 
-    /* Avatar Picker */
+    /* Avatar picker */
     .picker{
-      margin-top:12px;
-      padding:12px;
-      border-radius:18px;
-      border:1px solid rgba(20,40,60,.10);
+      margin-top:12px;padding:12px;
+      border-radius:18px;border:1px solid rgba(20,40,60,.10);
       background:#ffffffb8;
     }
     .pickerTop{
@@ -187,8 +172,7 @@
       margin-bottom:10px;
     }
     .pickerTitle{
-      font-weight:1000;
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      font-weight:1000;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
     }
     .pickerGrid{
       display:grid;
@@ -198,18 +182,10 @@
     @media (max-width: 900px){.pickerGrid{grid-template-columns: repeat(4, minmax(0, 1fr));}}
     @media (max-width: 640px){.pickerGrid{grid-template-columns: repeat(3, minmax(0, 1fr));}}
     .avItem{
-      border-radius:16px;
-      border:1px solid rgba(20,40,60,.12);
-      background:#fff;
-      box-shadow: 0 10px 18px rgba(15,35,55,.06);
-      padding:10px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      align-items:center;
-      cursor:pointer;
-      user-select:none;
-      transition:.12s ease;
+      border-radius:16px;border:1px solid rgba(20,40,60,.12);
+      background:#fff;box-shadow: 0 10px 18px rgba(15,35,55,.06);
+      padding:10px;display:flex;flex-direction:column;gap:8px;align-items:center;
+      cursor:pointer;user-select:none;transition:.12s ease;
     }
     .avItem:hover{transform: translateY(-2px)}
     .avItem.active{
@@ -220,20 +196,13 @@
       width:64px;height:64px;border-radius:18px;
       background: radial-gradient(circle at 30% 20%, #fff 0%, #f2f7ff 55%, #eaf0ff 100%);
       border:1px solid rgba(20,40,60,.10);
-      display:grid;place-items:center;
-      overflow:hidden;
+      display:grid;place-items:center;overflow:hidden;
     }
     .avThumb svg{width:58px;height:58px}
     .avLabel{
-      font-size:12px;
-      font-weight:1000;
-      color:var(--muted);
-      text-align:center;
-      line-height:1.2;
-      max-width:100%;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      font-size:12px;font-weight:1000;color:var(--muted);
+      text-align:center;line-height:1.2;max-width:100%;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
 
     /* Quiz */
@@ -361,7 +330,7 @@
                 <div class="avatar" id="kidAv_mohammed" aria-hidden="true"></div>
                 <div class="meta">
                   <div class="nameLine"><span class="nm">محمد</span></div>
-                  <div class="mode">جمع (٠ إلى ٢٠)</div>
+                  <div class="mode">جمع (٠ إلى ١٠)</div>
                 </div>
                 <span class="badge rightBadge" id="badge_mohammed">—</span>
               </div>
@@ -390,7 +359,7 @@
               <div class="pickerTop">
                 <div class="pickerTitle">
                   🎭 اختر أفاتار لـ <span class="badge" id="pickerKidName">—</span>
-                  <span class="badge mutebadge" id="pickerHint">اضغط على أفاتار للاختيار</span>
+                  <span class="badge mutebadge">اضغط على أفاتار للاختيار</span>
                 </div>
                 <div class="btns">
                   <button class="btn-primary" id="btnStartAfterPick">ابدأ الأسئلة ▶️</button>
@@ -398,8 +367,8 @@
               </div>
               <div class="pickerGrid" id="pickerGrid"></div>
               <div class="footerNote">
-                ✅ تم تجهيز أفاتار “بطل عنكبوتي” لمحمد، و“كائن أزرق لطيف” لآسية، و“أرنب لطيف بقبعة” لسلسبيل بشكل افتراضي.
-                إذا عندك صورهم الأصلية أرسلها لي وأبدّلها لك مباشرة.
+                ✅ افتراضيًا: محمد = “بطل عنكبوتي”، آسية = “كائن أزرق لطيف”، سلسبيل = “أرنب لطيف بقبعة”.<br/>
+                إذا عندك صورهم الأصلية أرسلها لي وأبدّلها لك.
               </div>
             </div>
 
@@ -488,34 +457,30 @@
 
 <script>
 (() => {
-  // ======= Constants =======
   const Q_COUNT = 5;
   const storageKey = "kids_math_scores_v4";
   const avatarKey = "kids_avatars_v1";
 
   const CHAR = {
-    mohammed: { name: "محمد", desc: "جمع للأعداد من ٠ إلى ٢٠", mode: "add" },
+    mohammed: { name: "محمد", desc: "جمع للأعداد من ٠ إلى ١٠", mode: "add" }, // ✅ updated
     asia:     { name: "آسية", desc: "ضرب للأعداد من ١ إلى ١٠", mode: "mul" },
     salsabil: { name: "سلسبيل", desc: "ضرب للأعداد من ١ إلى ١٠", mode: "mul" },
   };
 
-  // ======= Arabic-Indic digits =======
   const arabicDigits = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
   function toArabicIndic(str){
     return String(str).replace(/\d/g, d => arabicDigits[Number(d)]);
   }
   function fromArabicIndic(str){
-    // converts arabic-indic digits in a string to western digits then Number
     const western = String(str).replace(/[٠-٩]/g, ch => String(arabicDigits.indexOf(ch)));
     return Number(western);
   }
 
-  // ======= Cute original SVG avatars (placeholders) =======
-  // Note: These are original simple SVGs, inspired "style", not official copyrighted art.
+  // Original SVG avatars (placeholders)
   const AVATARS = [
-    { id:"spider_hero", label:"بطل عنكبوتي", svg: spiderHeroSVG() },      // محمد (بديل سبايدرمان)
-    { id:"blue_alien",  label:"كائن أزرق لطيف", svg: blueAlienSVG() },   // آسية (بديل ستيتش)
-    { id:"cute_bunny",  label:"أرنب لطيف بقبعة", svg: cuteBunnySVG() },  // سلسبيل (بديل كرومي)
+    { id:"spider_hero", label:"بطل عنكبوتي", svg: spiderHeroSVG() },
+    { id:"blue_alien",  label:"كائن أزرق لطيف", svg: blueAlienSVG() },
+    { id:"cute_bunny",  label:"أرنب لطيف بقبعة", svg: cuteBunnySVG() },
     { id:"robot",       label:"روبوت", svg: robotSVG() },
     { id:"lion",        label:"أسد", svg: lionSVG() },
     { id:"cat",         label:"قطة", svg: catSVG() },
@@ -525,7 +490,6 @@
     { id:"unicorn",     label:"يونيكورن", svg: unicornSVG() },
   ];
 
-  // ======= State =======
   let currentChar = null;
   let questions = [];
   let idx = 0;
@@ -533,10 +497,8 @@
   let timer = null;
   let secLeft = 10;
   let secPerQ = 10;
-
   let selectedKidForPicker = "mohammed";
 
-  // ======= DOM =======
   const pillStatus = document.getElementById("pillStatus");
   const pillTime = document.getElementById("pillTime");
 
@@ -581,7 +543,6 @@
   const pickerGrid = document.getElementById("pickerGrid");
   const btnStartAfterPick = document.getElementById("btnStartAfterPick");
 
-  // Time buttons
   const timeBtns = {
     5:  document.getElementById("t_5"),
     10: document.getElementById("t_10"),
@@ -589,7 +550,6 @@
     20: document.getElementById("t_20"),
   };
 
-  // ======= Helpers =======
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const randint = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
 
@@ -632,7 +592,6 @@
     return arr;
   }
 
-  // Unique operation keys per round
   function makeKeyAdd(a,b){
     const x = Math.min(a,b), y = Math.max(a,b);
     return `add:${x}+${y}`;
@@ -669,8 +628,10 @@
       let a,b,ans,text,key;
 
       if(mode === "add"){
-        a = randint(0,20);
-        b = randint(0,20);
+        // ✅ محمد فقط ٠..١٠
+        const max = (charKey === "mohammed") ? 10 : 20; // safe fallback
+        a = randint(0, max);
+        b = randint(0, max);
         ans = a + b;
         key = makeKeyAdd(a,b);
         text = `${toArabicIndic(a)} + ${toArabicIndic(b)} = ؟`;
@@ -716,7 +677,7 @@
         stopTimer();
         disableChoices();
         showToast("warn", "انتهى الوقت ⏱️");
-        setTimeout(() => nextQuestion(false, true), 350);
+        setTimeout(() => nextQuestion(), 350);
       }
     }, 1000);
   }
@@ -758,7 +719,7 @@
       showToast("no", "خطأ ❌");
     }
 
-    setTimeout(() => nextQuestion(isCorrect, false), 550);
+    setTimeout(() => nextQuestion(), 550);
   }
 
   function nextQuestion(){
@@ -843,7 +804,6 @@
       rankList.innerHTML = "";
     }
 
-    // refresh kid avatars
     renderKidAvatars();
   }
 
@@ -857,20 +817,8 @@
     setView(homeView);
   }
 
-  function resetAll(){
-    stopTimer();
-    localStorage.removeItem(storageKey);
-    localStorage.removeItem(avatarKey);
-    initDefaultAvatars();
-    refreshBoard();
-    goHome();
-    pillStatus.firstChild.textContent = "تم تصفير النتائج ✅ ";
-  }
-
-  // ======= Avatar selection logic =======
   function initDefaultAvatars(){
     const a = loadAvatars();
-    // defaults: محمد=spider_hero, آسية=blue_alien, سلسبيل=cute_bunny
     if(!a.mohammed) a.mohammed = "spider_hero";
     if(!a.asia) a.asia = "blue_alien";
     if(!a.salsabil) a.salsabil = "cute_bunny";
@@ -880,12 +828,10 @@
   function getAvatarById(id){
     return AVATARS.find(x => x.id === id) || AVATARS[0];
   }
-
   function renderAvatarInto(el, avatarId){
     const av = getAvatarById(avatarId);
     el.innerHTML = av.svg;
   }
-
   function renderKidAvatars(){
     const a = loadAvatars();
     renderAvatarInto(kidAvMoh, a.mohammed);
@@ -922,7 +868,17 @@
     });
   }
 
-  // ======= SVG generators (simple original icons) =======
+  function resetAll(){
+    stopTimer();
+    localStorage.removeItem(storageKey);
+    localStorage.removeItem(avatarKey);
+    initDefaultAvatars();
+    refreshBoard();
+    goHome();
+    pillStatus.firstChild.textContent = "تم تصفير النتائج ✅ ";
+  }
+
+  // SVGs
   function spiderHeroSVG(){
     return `
       <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -1054,37 +1010,24 @@
       </svg>`;
   }
 
-  // ======= Init default avatars =======
+  // ======= Init =======
   function ensureDefaults(){
     initDefaultAvatars();
     renderKidAvatars();
     openPickerForKid("mohammed");
   }
 
-  // ======= Events =======
+  // Events
   document.querySelectorAll(".char").forEach(el => {
-    el.addEventListener("click", () => {
-      const kid = el.getAttribute("data-char");
-      // when clicking a kid card: open picker for that kid (and not start immediately)
-      openPickerForKid(kid);
-    });
+    el.addEventListener("click", () => openPickerForKid(el.getAttribute("data-char")));
   });
-
-  Object.values(timeBtns).forEach(btn => {
-    btn.addEventListener("click", () => setTimePerQuestion(Number(btn.dataset.time)));
-  });
-
-  btnStartAfterPick.addEventListener("click", () => {
-    // start quiz for currently selected kid in picker
-    startRound(selectedKidForPicker);
-  });
-
+  Object.values(timeBtns).forEach(btn => btn.addEventListener("click", () => setTimePerQuestion(Number(btn.dataset.time))));
+  document.getElementById("btnStartAfterPick").addEventListener("click", () => startRound(selectedKidForPicker));
   btnBack.addEventListener("click", goHome);
   btnHome.addEventListener("click", goHome);
   btnToHome2.addEventListener("click", goHome);
   btnReset.addEventListener("click", resetAll);
 
-  // ======= Init =======
   setTimePerQuestion(10);
   ensureDefaults();
   refreshBoard();
