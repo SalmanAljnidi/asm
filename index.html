@@ -57,6 +57,7 @@
     }
     .grid{display:grid;grid-template-columns: 1.15fr .85fr;gap:16px}
     @media (max-width: 900px){.grid{grid-template-columns:1fr}}
+
     .card{
       background: var(--card);
       border: 1px solid rgba(20,40,60,.08);
@@ -69,10 +70,11 @@
     .card .hd h2{margin:0;font-size:18px}
     .card .hd p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
     .card .bd{padding:14px 18px 18px}
+
     .btns{display:flex;gap:10px;flex-wrap:wrap}
     button{
       border:0;border-radius: 14px;padding:12px 14px;
-      font-weight:800;cursor:pointer;transition: transform .08s ease, filter .2s ease;
+      font-weight:900;cursor:pointer;transition: transform .08s ease, filter .2s ease;
       font-size:14px;
     }
     button:active{transform: translateY(1px) scale(.99)}
@@ -91,54 +93,63 @@
       color:white;
       box-shadow: 0 14px 26px rgba(255,77,90,.22);
     }
-    .btn-good{
-      background: linear-gradient(135deg, #1aa36f, #2b7cff);
-      color:white;
-      box-shadow: 0 14px 26px rgba(26,163,111,.20);
+
+    .badge{
+      font-size:12px;padding:6px 10px;border-radius:999px;
+      background: #eef5ff;border:1px solid rgba(43,124,255,.15);
+      color:#1b4aa8;font-weight:1000;white-space:nowrap;
+    }
+    .mutebadge{background:#f7f7f9;border:1px solid rgba(20,40,60,.10);color:var(--muted)}
+
+    /* Controls */
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .seg{
+      display:flex;gap:6px;align-items:center;
+      padding:8px;border-radius:16px;
+      background:#ffffffb8;border:1px solid rgba(20,40,60,.10);
+      flex-wrap:wrap;
+    }
+    .seg label{font-size:12px;color:var(--muted);font-weight:1000;margin-inline:6px}
+    .seg button{padding:10px 12px;border-radius:12px;font-size:13px}
+    .seg .active{
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color:#fff;
+      border:0;
     }
 
+    /* Characters */
     .chars{display:grid;grid-template-columns: repeat(3, 1fr);gap:12px;margin-top:10px}
     @media (max-width: 560px){.chars{grid-template-columns:1fr}}
     .char{
       border-radius: 18px;border:1px solid rgba(20,40,60,.10);
       background:#ffffffb8;padding:12px;display:flex;gap:10px;align-items:center;
-      cursor:pointer;user-select:none;transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
+      cursor:pointer;user-select:none;
+      transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
+      overflow: hidden; /* important: keep layout clean */
     }
     .char:hover{transform: translateY(-2px);box-shadow: 0 16px 34px rgba(15,35,55,.12);filter:saturate(1.05)}
-    .char .nm{font-weight:1000}
-    .char .mode{font-size:12px;color:var(--muted);margin-top:2px}
-    .char .meta{display:flex;flex-direction:column}
     .avatar{
       width:56px;height:56px;border-radius:18px;display:grid;place-items:center;
       background: radial-gradient(circle at 30% 20%, #fff 0%, #f2f7ff 55%, #eaf0ff 100%);
-      border:1px solid rgba(20,40,60,.10);overflow:hidden;
+      border:1px solid rgba(20,40,60,.10);overflow:hidden;flex:0 0 auto;
     }
-    .badge{
-      font-size:12px;padding:6px 10px;border-radius:999px;
-      background: #eef5ff;border:1px solid rgba(43,124,255,.15);
-      color:#1b4aa8;font-weight:900;white-space:nowrap;
+    .meta{
+      display:flex;flex-direction:column;
+      min-width:0; /* FIX: prevents name clipping weirdness */
+      flex:1;      /* FIX: give text area room */
     }
-    .mutebadge{
-      background:#f7f7f9;border:1px solid rgba(20,40,60,.10);color:var(--muted);
+    .char .nm{
+      font-weight:1000;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis; /* FIX: never “يأكل” الاسم */
+      max-width:100%;
     }
+    .char .mode{font-size:12px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .char .rightBadge{flex:0 0 auto}
+
     .divider{height:1px;background:rgba(20,40,60,.10);margin:10px 0}
     .footerNote{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.6}
-
-    /* Difficulty + toggles */
-    .controls{
-      display:flex;gap:10px;flex-wrap:wrap;margin-top:10px
-    }
-    .seg{
-      display:flex;gap:6px;align-items:center;
-      padding:8px;border-radius:16px;
-      background:#ffffffb8;border:1px solid rgba(20,40,60,.10);
-    }
-    .seg label{font-size:12px;color:var(--muted);font-weight:900;margin-inline:6px}
-    .seg button{padding:10px 12px;border-radius:12px;font-size:13px}
-    .seg .active{
-      background: linear-gradient(135deg, var(--primary), var(--primary2));
-      color:#fff;
-    }
 
     /* Quiz */
     .quizBox{
@@ -161,13 +172,35 @@
       transform-origin: right center;transform: scaleX(1);
       transition: transform .2s linear;
     }
-    .sec{min-width:44px;text-align:center;font-weight:1000;color:var(--muted)}
-    .answer{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:10px}
-    input[type="number"]{
-      width:min(260px, 100%);
-      padding:12px 14px;border-radius:14px;border:1px solid rgba(20,40,60,.14);
-      background:#ffffff;font-size:18px;font-weight:1000;text-align:center;outline:none;
+    .sec{min-width:58px;text-align:center;font-weight:1000;color:var(--muted)}
+
+    /* Choices */
+    .choices{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    @media (max-width: 520px){
+      .choices{grid-template-columns:1fr}
+    }
+    .choiceBtn{
+      background:#ffffff;
+      border:1px solid rgba(20,40,60,.14);
       box-shadow: 0 10px 18px rgba(15,35,55,.06);
+      text-align:center;
+      padding:14px 12px;
+      border-radius:16px;
+      font-size:18px;
+      font-weight:1000;
+    }
+    .choiceBtn.correct{
+      background:#eafff5;border-color: rgba(26,163,111,.25);
+      color:#0d6f4a;
+    }
+    .choiceBtn.wrong{
+      background:#fff0f1;border-color: rgba(255,77,90,.25);
+      color:#a61d2a;
     }
     .hint{margin-top:10px;text-align:center;font-size:12px;color:var(--muted);line-height:1.6}
     .toast{
@@ -186,7 +219,7 @@
     }
     .row .left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
     .pts{font-weight:1000;font-size:16px}
-    .small{font-size:12px;color:var(--muted);font-weight:900}
+    .small{font-size:12px;color:var(--muted);font-weight:1000}
     .rank{display:grid;gap:10px;margin-top:12px}
     .rankItem{
       padding:12px 14px;border-radius:16px;background:#ffffffb8;border:1px solid rgba(20,40,60,.10);
@@ -196,23 +229,8 @@
       width:32px;height:32px;border-radius:12px;display:grid;place-items:center;
       background:#eef5ff;border:1px solid rgba(43,124,255,.15);color:#1b4aa8;
     }
-    .hidden{display:none !important}
 
-    /* Celebration */
-    .spark{
-      position:fixed;inset:auto auto 20px 20px;
-      padding:10px 12px;border-radius:14px;
-      background: #ffffffd6;border:1px solid rgba(20,40,60,.10);
-      box-shadow: 0 16px 34px rgba(15,35,55,.12);
-      font-weight:1000;color:var(--ink);
-      transform: translateY(20px);
-      opacity:0;pointer-events:none;
-      transition: .25s ease;
-    }
-    .spark.show{
-      transform: translateY(0);
-      opacity:1;
-    }
+    .hidden{display:none !important}
   </style>
 </head>
 
@@ -223,14 +241,13 @@
         <div class="logo">+</div>
         <div>
           <h1>تحدّي الحساب للأبطال الثلاثة</h1>
-          <div class="sub">5 أسئلة — 10 ثواني لكل سؤال — النتيجة من 10</div>
+          <div class="sub">٥ أسئلة — وقت تختاره — اختيارات بدل كتابة — أرقام عربية</div>
         </div>
       </div>
 
       <div class="pill" id="pillStatus">
         جاهزين؟ اختر شخصية وابدأ 👇
-        <span class="badge mutebadge" id="pillDiff">الصعوبة: سهل</span>
-        <span class="badge mutebadge" id="pillSound">الصوت: تشغيل</span>
+        <span class="badge mutebadge" id="pillTime">الوقت: ١٠ ث</span>
       </div>
     </div>
 
@@ -240,11 +257,10 @@
         <div class="hd">
           <div>
             <h2 id="mainTitle">الصفحة الرئيسية</h2>
-            <p id="mainDesc">اختر شخصية لبدء التحدّي. تقدر تغيّر الصعوبة وتشغّل/تطفي الصوت.</p>
+            <p id="mainDesc">اختر شخصية ثم أجب بالاختيارات خلال الوقت المحدد.</p>
           </div>
           <div class="btns">
             <button class="btn-ghost" id="btnHome" title="العودة للرئيسية">🏠 الرئيسية</button>
-            <button class="btn-ghost" id="btnToggleSound" title="تشغيل/إيقاف الصوت">🔊 الصوت</button>
             <button class="btn-danger" id="btnReset" title="مسح النتائج">🧹 تصفير النتائج</button>
           </div>
         </div>
@@ -253,24 +269,23 @@
           <!-- HOME -->
           <div id="homeView">
             <div class="controls">
-              <div class="seg" aria-label="الصعوبة">
-                <label>الصعوبة</label>
-                <button class="btn-ghost" data-diff="easy" id="diff_easy">سهل</button>
-                <button class="btn-ghost" data-diff="med"  id="diff_med">متوسط</button>
-                <button class="btn-ghost" data-diff="hard" id="diff_hard">صعب</button>
+              <div class="seg" aria-label="وقت السؤال">
+                <label>وقت السؤال</label>
+                <button class="btn-ghost" data-time="5"  id="t_5">٥ ث</button>
+                <button class="btn-ghost active" data-time="10" id="t_10">١٠ ث</button>
+                <button class="btn-ghost" data-time="15" id="t_15">١٥ ث</button>
+                <button class="btn-ghost" data-time="20" id="t_20">٢٠ ث</button>
               </div>
-
-              <div class="seg" aria-label="معلومة">
-                <label>الهدف</label>
-                <span class="badge">كل إجابة صحيحة = 2</span>
-                <span class="badge mutebadge">محاولة ثانية مسموحة قبل انتهاء الوقت</span>
+              <div class="seg">
+                <label>التسجيل</label>
+                <span class="badge">كل إجابة صحيحة = ٢</span>
+                <span class="badge mutebadge">النتيجة من ١٠</span>
               </div>
             </div>
 
             <div class="chars">
               <div class="char" data-char="mohammed">
                 <div class="avatar" aria-hidden="true">
-                  <!-- Boy SVG -->
                   <svg width="56" height="56" viewBox="0 0 56 56">
                     <defs>
                       <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
@@ -288,14 +303,13 @@
                 </div>
                 <div class="meta">
                   <div class="nm">محمد</div>
-                  <div class="mode">جمع (حسب الصعوبة)</div>
+                  <div class="mode">جمع (٠ إلى ٢٠)</div>
                 </div>
-                <span class="badge" id="badge_mohammed">—</span>
+                <span class="badge rightBadge" id="badge_mohammed">—</span>
               </div>
 
               <div class="char" data-char="asia">
                 <div class="avatar" aria-hidden="true">
-                  <!-- Girl SVG -->
                   <svg width="56" height="56" viewBox="0 0 56 56">
                     <defs>
                       <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
@@ -315,14 +329,13 @@
                 </div>
                 <div class="meta">
                   <div class="nm">آسية</div>
-                  <div class="mode">ضرب (حسب الصعوبة)</div>
+                  <div class="mode">ضرب (١ إلى ١٠)</div>
                 </div>
-                <span class="badge" id="badge_asia">—</span>
+                <span class="badge rightBadge" id="badge_asia">—</span>
               </div>
 
               <div class="char" data-char="salsabil">
                 <div class="avatar" aria-hidden="true">
-                  <!-- Girl SVG 2 -->
                   <svg width="56" height="56" viewBox="0 0 56 56">
                     <defs>
                       <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
@@ -341,16 +354,15 @@
                 </div>
                 <div class="meta">
                   <div class="nm">سلسبيل</div>
-                  <div class="mode">ضرب (حسب الصعوبة)</div>
+                  <div class="mode">ضرب (١ إلى ١٠)</div>
                 </div>
-                <span class="badge" id="badge_salsabil">—</span>
+                <span class="badge rightBadge" id="badge_salsabil">—</span>
               </div>
             </div>
 
             <div class="divider"></div>
             <div class="footerNote">
-              💡 بعد ما يلعبون الثلاثة، يظهر ترتيب المنافسة تلقائيًا (حسب <b>آخر نتيجة</b>). <br/>
-              ✅ الدرجات محفوظة على هذا الجهاز.
+              ✅ النتائج محفوظة على هذا الجهاز، وتظهر لوحة ترتيب بعد ما يلعبون الثلاثة.
             </div>
           </div>
 
@@ -362,24 +374,20 @@
                   <div class="who" id="whoName">—</div>
                   <div class="desc" id="whoDesc">—</div>
                 </div>
-                <div class="progress" id="progressText">سؤال 1 من 5</div>
+                <div class="progress" id="progressText">—</div>
               </div>
 
               <div class="timerWrap">
                 <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
-                <div class="sec"><span id="secLeft">10</span>ث</div>
+                <div class="sec"><span id="secLeft">١٠</span> ث</div>
               </div>
 
               <div class="q" id="questionText">—</div>
 
-              <div class="answer">
-                <input id="answerInput" type="number" inputmode="numeric" placeholder="اكتب الإجابة" />
-                <button class="btn-primary" id="btnSubmit">إرسال ✅</button>
-                <button class="btn-ghost" id="btnSkip">تخطي ⏭️</button>
-              </div>
+              <div class="choices" id="choices"></div>
 
               <div id="toast" class="toast">—</div>
-              <div class="hint">اضغط Enter للإرسال بسرعة ✨</div>
+              <div class="hint">اختر الإجابة الصحيحة بسرعة ✨</div>
             </div>
 
             <div class="btns" style="margin-top:12px">
@@ -395,18 +403,8 @@
 
               <div class="divider"></div>
 
-              <div style="font-weight:1000;margin-bottom:8px">📋 ملخّص الجولة</div>
-              <div id="reviewBox" style="display:grid;gap:8px"></div>
-
-              <div class="divider"></div>
-
               <div class="btns" style="justify-content:center">
-                <button class="btn-good" id="btnPlayAgain">إعادة نفس الشخصية 🔁</button>
-                <button class="btn-ghost" id="btnToHome2">اختيار شخصية ثانية 👤</button>
-              </div>
-
-              <div class="footerNote" style="text-align:center">
-                🌟 نصيحة: لو الدرجة ضعيفة، جرّب “سهل” أول، ثم ارفع الصعوبة.
+                <button class="btn-primary" id="btnToHome2">اختيار شخصية ثانية 👤</button>
               </div>
             </div>
           </div>
@@ -419,113 +417,81 @@
         <div class="hd">
           <div>
             <h2>لوحة المنافسة</h2>
-            <p>تظهر (آخر نتيجة + أفضل نتيجة) لكل طفل، والترتيب بعد اكتمال الثلاثة.</p>
+            <p>آخر نتيجة لكل طفل (من ١٠) + ترتيب بعد اكتمال الثلاثة.</p>
           </div>
         </div>
 
         <div class="bd">
-          <div class="scoreboard" id="scoreboard">
+          <div class="scoreboard">
             <div class="row">
-              <div class="left">
-                <span class="badge">محمد</span>
-                <span class="small" id="mode_m">—</span>
-              </div>
+              <div class="left"><span class="badge">محمد</span><span class="small">جمع</span></div>
               <div class="pts" id="score_mohammed">—</div>
             </div>
-
             <div class="row">
-              <div class="left">
-                <span class="badge">آسية</span>
-                <span class="small" id="mode_a">—</span>
-              </div>
+              <div class="left"><span class="badge">آسية</span><span class="small">ضرب</span></div>
               <div class="pts" id="score_asia">—</div>
             </div>
-
             <div class="row">
-              <div class="left">
-                <span class="badge">سلسبيل</span>
-                <span class="small" id="mode_s">—</span>
-              </div>
+              <div class="left"><span class="badge">سلسبيل</span><span class="small">ضرب</span></div>
               <div class="pts" id="score_salsabil">—</div>
             </div>
 
             <div class="divider"></div>
 
             <div id="rankBox" class="hidden">
-              <div style="font-weight:1000;margin-bottom:8px">🏆 الترتيب النهائي (آخر نتيجة)</div>
+              <div style="font-weight:1000;margin-bottom:8px">🏆 الترتيب النهائي</div>
               <div class="rank" id="rankList"></div>
             </div>
 
             <div class="footerNote">
-              ✅ “أفضل نتيجة” تُحفّزهم يحسّنون مستواهم. <br/>
-              🧹 تقدر تصفير النتائج من الزر بالأعلى.
+              🧹 لتصفير النتائج اضغط “تصفير النتائج”.
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <div class="spark" id="spark">🌟 ممتاز!</div>
-
 <script>
 (() => {
-  // ========== Config ==========
+  // ======= Constants =======
   const Q_COUNT = 5;
-  const SEC_PER_Q = 10;
+  const storageKey = "kids_math_scores_v3";
 
   const CHAR = {
-    mohammed: { name: "محمد", baseDesc: "جمع", mode: "add" },
-    asia:     { name: "آسية", baseDesc: "ضرب", mode: "mul" },
-    salsabil: { name: "سلسبيل", baseDesc: "ضرب", mode: "mul" },
+    mohammed: { name: "محمد", desc: "جمع للأعداد من ٠ إلى ٢٠", mode: "add" },
+    asia:     { name: "آسية", desc: "ضرب للأعداد من ١ إلى ١٠", mode: "mul" },
+    salsabil: { name: "سلسبيل", desc: "ضرب للأعداد من ١ إلى ١٠", mode: "mul" },
   };
 
-  // Difficulty affects ranges (kept kid-friendly)
-  const DIFF = {
-    easy: { label:"سهل", addMax:10, mulMax:5 },
-    med:  { label:"متوسط", addMax:20, mulMax:10 },
-    hard: { label:"صعب", addMax:50, mulMax:12 },
-  };
+  // ======= Arabic-Indic digits =======
+  const arabicDigits = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+  function toArabicIndic(str){
+    return String(str).replace(/\d/g, d => arabicDigits[Number(d)]);
+  }
 
-  const storageKey = "kids_math_scores_v2";
-
-  // ========== State ==========
+  // ======= State =======
   let currentChar = null;
-  let currentDiff = "easy";
-  let soundOn = true;
-
-  let questions = []; // {text, answer, key, userAns, correct, timeout}
+  let questions = []; // {text, answer, key, choices[]}
   let idx = 0;
-  let points = 0;     // out of 10 (each correct=2)
+  let points = 0; // out of 10 (each correct = 2)
   let timer = null;
-  let secLeft = SEC_PER_Q;
-  let wrongAttemptsThisQ = 0; // allow retry within time
-  let audioCtx = null;
+  let secLeft = 10;
+  let secPerQ = 10;
 
-  // ========== DOM ==========
+  // ======= DOM =======
   const pillStatus = document.getElementById("pillStatus");
-  const pillDiff = document.getElementById("pillDiff");
-  const pillSound = document.getElementById("pillSound");
+  const pillTime = document.getElementById("pillTime");
 
   const homeView = document.getElementById("homeView");
   const quizView = document.getElementById("quizView");
   const resultView = document.getElementById("resultView");
 
-  const mainTitle = document.getElementById("mainTitle");
-  const mainDesc  = document.getElementById("mainDesc");
-
   const whoName = document.getElementById("whoName");
   const whoDesc = document.getElementById("whoDesc");
   const progressText = document.getElementById("progressText");
   const questionText = document.getElementById("questionText");
-  const answerInput = document.getElementById("answerInput");
-  const btnSubmit = document.getElementById("btnSubmit");
-  const btnSkip = document.getElementById("btnSkip");
-  const btnBack = document.getElementById("btnBack");
-  const btnHome = document.getElementById("btnHome");
-  const btnReset = document.getElementById("btnReset");
-  const btnToggleSound = document.getElementById("btnToggleSound");
+  const choicesEl = document.getElementById("choices");
 
   const secLeftEl = document.getElementById("secLeft");
   const barFill = document.getElementById("barFill");
@@ -533,77 +499,40 @@
 
   const resultTitle = document.getElementById("resultTitle");
   const resultSub = document.getElementById("resultSub");
-  const btnPlayAgain = document.getElementById("btnPlayAgain");
+
+  const btnBack = document.getElementById("btnBack");
+  const btnHome = document.getElementById("btnHome");
+  const btnReset = document.getElementById("btnReset");
   const btnToHome2 = document.getElementById("btnToHome2");
-  const reviewBox = document.getElementById("reviewBox");
 
   const scoreMoh = document.getElementById("score_mohammed");
   const scoreAsia = document.getElementById("score_asia");
   const scoreSal = document.getElementById("score_salsabil");
+
   const badgeMoh = document.getElementById("badge_mohammed");
   const badgeAsia = document.getElementById("badge_asia");
   const badgeSal = document.getElementById("badge_salsabil");
 
-  const modeM = document.getElementById("mode_m");
-  const modeA = document.getElementById("mode_a");
-  const modeS = document.getElementById("mode_s");
-
   const rankBox = document.getElementById("rankBox");
   const rankList = document.getElementById("rankList");
 
-  const spark = document.getElementById("spark");
-
-  const diffBtns = {
-    easy: document.getElementById("diff_easy"),
-    med:  document.getElementById("diff_med"),
-    hard: document.getElementById("diff_hard"),
+  // Time buttons
+  const timeBtns = {
+    5:  document.getElementById("t_5"),
+    10: document.getElementById("t_10"),
+    15: document.getElementById("t_15"),
+    20: document.getElementById("t_20"),
   };
 
-  // ========== Helpers ==========
+  // ======= Helpers =======
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const randint = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
 
-  function showSpark(msg){
-    spark.textContent = msg;
-    spark.classList.add("show");
-    setTimeout(() => spark.classList.remove("show"), 900);
+  function loadScores(){
+    try{ return JSON.parse(localStorage.getItem(storageKey) || "{}"); }
+    catch{ return {}; }
   }
-
-  function ensureAudio(){
-    if(!audioCtx){
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if(AC) audioCtx = new AC();
-    }
-  }
-
-  function beep(freq=440, ms=90, type="sine", gain=0.04){
-    if(!soundOn) return;
-    ensureAudio();
-    if(!audioCtx) return;
-    const t0 = audioCtx.currentTime;
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    o.type = type;
-    o.frequency.value = freq;
-    g.gain.value = gain;
-    o.connect(g);
-    g.connect(audioCtx.destination);
-    o.start(t0);
-    o.stop(t0 + ms/1000);
-  }
-
-  function soundOk(){ beep(660, 90, "triangle", 0.05); setTimeout(()=>beep(880, 90, "triangle", 0.05), 90); }
-  function soundNo(){ beep(220, 120, "sawtooth", 0.035); }
-  function soundTick(){ beep(520, 40, "sine", 0.02); }
-  function soundWin(){ beep(523,120,"triangle",0.05); setTimeout(()=>beep(659,120,"triangle",0.05),130); setTimeout(()=>beep(784,140,"triangle",0.05),270); }
-
-  function loadState(){
-    try{
-      const raw = localStorage.getItem(storageKey);
-      return raw ? JSON.parse(raw) : {};
-    }catch{ return {}; }
-  }
-  function saveState(s){ localStorage.setItem(storageKey, JSON.stringify(s)); }
+  function saveScores(s){ localStorage.setItem(storageKey, JSON.stringify(s)); }
 
   function setView(which){
     homeView.classList.add("hidden");
@@ -615,57 +544,82 @@
   function showToast(kind, msg){
     toast.className = "toast " + kind; // ok/no/warn
     toast.textContent = msg;
-    setTimeout(() => { toast.className = "toast"; toast.textContent = "—"; }, 980);
+    setTimeout(() => { toast.className = "toast"; toast.textContent = "—"; }, 900);
   }
 
-  function setDifficulty(diff){
-    currentDiff = diff;
-    Object.keys(diffBtns).forEach(k => diffBtns[k].classList.toggle("active", k===diff));
-    pillDiff.textContent = `الصعوبة: ${DIFF[diff].label}`;
-    refreshBoard();
+  function setTimePerQuestion(sec){
+    secPerQ = sec;
+    Object.keys(timeBtns).forEach(k => timeBtns[k].classList.toggle("active", Number(k) === sec));
+    pillTime.textContent = `الوقت: ${toArabicIndic(sec)} ث`;
   }
 
-  function setSound(on){
-    soundOn = on;
-    pillSound.textContent = `الصوت: ${soundOn ? "تشغيل" : "إيقاف"}`;
-    btnToggleSound.textContent = soundOn ? "🔊 الصوت" : "🔇 الصوت";
+  // Unique operation keys per round
+  function makeKeyAdd(a,b){
+    const x = Math.min(a,b), y = Math.max(a,b);
+    return `add:${x}+${y}`;
+  }
+  function makeKeyMul(a,b){
+    const x = Math.min(a,b), y = Math.max(a,b);
+    return `mul:${x}x${y}`;
   }
 
-  function prettyMode(charKey){
-    const d = DIFF[currentDiff];
-    if(CHAR[charKey].mode === "add") return `جمع 0–${d.addMax}`;
-    return `ضرب 1–${d.mulMax}`;
+  function shuffle(arr){
+    for(let i=arr.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
   }
 
-  // Generate non-repeating within a round
+  function makeChoices(correct, mode){
+    // 4 choices total
+    const s = new Set([correct]);
+
+    while(s.size < 4){
+      let cand;
+      if(mode === "add"){
+        // close-ish values
+        const delta = randint(-6, 6);
+        cand = correct + delta;
+        if(cand < 0) cand = Math.abs(cand);
+      } else {
+        // multiplication: small variations
+        const delta = randint(-10, 10);
+        cand = correct + delta;
+        if(cand < 0) cand = Math.abs(cand);
+      }
+      s.add(cand);
+    }
+    return shuffle([...s]);
+  }
+
   function generateQuestions(charKey){
     const mode = CHAR[charKey].mode;
-    const d = DIFF[currentDiff];
     const used = new Set();
     const qs = [];
 
     while(qs.length < Q_COUNT){
-      let a,b,text,ans,key;
+      let a,b,ans,text,key;
 
       if(mode === "add"){
-        a = randint(0, d.addMax);
-        b = randint(0, d.addMax);
+        a = randint(0,20);
+        b = randint(0,20);
         ans = a + b;
-        const x = Math.min(a,b), y = Math.max(a,b);
-        key = `add:${x}+${y}`;
-        text = `${a} + ${b} = ؟`;
+        key = makeKeyAdd(a,b);
+        text = `${toArabicIndic(a)} + ${toArabicIndic(b)} = ؟`;
       } else {
-        a = randint(1, d.mulMax);
-        b = randint(1, d.mulMax);
+        a = randint(1,10);
+        b = randint(1,10);
         ans = a * b;
-        const x = Math.min(a,b), y = Math.max(a,b);
-        key = `mul:${x}×${y}`;
-        text = `${a} × ${b} = ؟`;
+        key = makeKeyMul(a,b);
+        text = `${toArabicIndic(a)} × ${toArabicIndic(b)} = ؟`;
       }
 
       if(used.has(key)) continue;
       used.add(key);
-      qs.push({ text, answer: ans, key, userAns: null, correct: false, timeout:false });
+
+      const choices = makeChoices(ans, mode).map(n => toArabicIndic(n));
+      qs.push({ text, answer: ans, key, choices });
     }
     return qs;
   }
@@ -676,11 +630,8 @@
     idx = 0;
     points = 0;
 
-    mainTitle.textContent = `دور: ${CHAR[charKey].name}`;
-    mainDesc.textContent  = "جاوب بسرعة قبل ما ينتهي الوقت!";
-
     whoName.textContent = `👤 ${CHAR[charKey].name}`;
-    whoDesc.textContent = `${CHAR[charKey].baseDesc} — ${prettyMode(charKey)} — الصعوبة: ${DIFF[currentDiff].label}`;
+    whoDesc.textContent = `${CHAR[charKey].desc} — وقت السؤال: ${toArabicIndic(secPerQ)} ث`;
 
     pillStatus.firstChild.textContent = `بدأنا! دور ${CHAR[charKey].name} 🚀 `;
     setView(quizView);
@@ -691,128 +642,74 @@
     if(timer){ clearInterval(timer); timer = null; }
   }
 
+  function updateTimerUI(){
+    secLeftEl.textContent = toArabicIndic(clamp(secLeft,0,secPerQ));
+    const ratio = clamp(secLeft / secPerQ, 0, 1);
+    barFill.style.transform = `scaleX(${ratio})`;
+  }
+
   function startTimer(){
     stopTimer();
-    secLeft = SEC_PER_Q;
+    secLeft = secPerQ;
     updateTimerUI();
     timer = setInterval(() => {
       secLeft -= 1;
       updateTimerUI();
-
-      // gentle ticks last 3 seconds
-      if(secLeft <= 3 && secLeft > 0) soundTick();
-
       if(secLeft <= 0){
         stopTimer();
-        // time's up -> next
-        nextQuestion(false, true);
+        disableChoices();
+        showToast("warn", "انتهى الوقت ⏱️");
+        setTimeout(() => nextQuestion(false, true), 350);
       }
     }, 1000);
   }
 
-  function updateTimerUI(){
-    secLeftEl.textContent = String(clamp(secLeft,0,SEC_PER_Q));
-    const ratio = clamp(secLeft / SEC_PER_Q, 0, 1);
-    barFill.style.transform = `scaleX(${ratio})`;
+  function disableChoices(){
+    [...choicesEl.querySelectorAll("button")].forEach(b => b.disabled = true);
   }
 
   function renderQuestion(){
-    wrongAttemptsThisQ = 0;
     const q = questions[idx];
-    progressText.textContent = `سؤال ${idx+1} من ${Q_COUNT}`;
+    progressText.textContent = `سؤال ${toArabicIndic(idx+1)} من ${toArabicIndic(Q_COUNT)}`;
     questionText.textContent = q.text;
-    answerInput.value = "";
-    answerInput.focus();
+
+    choicesEl.innerHTML = "";
+    q.choices.forEach((label) => {
+      const btn = document.createElement("button");
+      btn.className = "choiceBtn";
+      btn.textContent = label;
+      btn.addEventListener("click", () => chooseAnswer(label, q));
+      choicesEl.appendChild(btn);
+    });
+
     startTimer();
   }
 
-  function finishRound(){
+  function chooseAnswer(label, q){
     stopTimer();
-    const name = CHAR[currentChar].name;
-    resultTitle.textContent = `انتهت جولة ${name} 🎉`;
-    resultSub.textContent = `درجتك: ${points} من 10 — الصعوبة: ${DIFF[currentDiff].label}`;
+    disableChoices();
 
-    // Review list
-    reviewBox.innerHTML = "";
-    questions.forEach((q, i) => {
-      const div = document.createElement("div");
-      div.style.padding = "10px 12px";
-      div.style.borderRadius = "14px";
-      div.style.border = "1px solid rgba(20,40,60,.10)";
-      div.style.background = "#ffffffb8";
-      div.style.display = "flex";
-      div.style.justifyContent = "space-between";
-      div.style.alignItems = "center";
-      div.style.gap = "12px";
-      div.style.flexWrap = "wrap";
+    const chosen = Number(label.replace(/[٠-٩]/g, d => arabicDigits.indexOf(d)));
+    const isCorrect = chosen === q.answer;
 
-      const left = document.createElement("div");
-      left.style.fontWeight = "1000";
-      left.textContent = `${i+1}) ${q.text}`;
-
-      const right = document.createElement("div");
-      right.style.fontWeight = "1000";
-      right.style.color = q.correct ? "#0d6f4a" : "#a61d2a";
-      const ua = (q.userAns === null ? "—" : q.userAns);
-      const tag = q.timeout ? "⏱️" : (q.correct ? "✅" : "❌");
-      right.textContent = `${tag} إجابتك: ${ua} | الصحيح: ${q.answer}`;
-
-      div.appendChild(left);
-      div.appendChild(right);
-      reviewBox.appendChild(div);
+    // mark buttons
+    [...choicesEl.querySelectorAll("button")].forEach(b => {
+      const val = Number(b.textContent.replace(/[٠-٩]/g, d => arabicDigits.indexOf(d)));
+      if(val === q.answer) b.classList.add("correct");
+      if(b.textContent === label && !isCorrect) b.classList.add("wrong");
     });
 
-    // Save (last + best + mode text)
-    const st = loadState();
-    if(!st.scores) st.scores = {};
-    const entry = st.scores[currentChar] || {};
-    const best = Math.max(entry.best ?? 0, points);
-
-    st.scores[currentChar] = {
-      last: points,
-      best: best,
-      diffLabel: DIFF[currentDiff].label,
-      modeLabel: prettyMode(currentChar),
-      updatedAt: Date.now()
-    };
-    st.updatedAt = Date.now();
-    saveState(st);
-
-    refreshBoard();
-
-    pillStatus.firstChild.textContent = `تم تسجيل نتيجة ${name}: ${points}/10 ✅ `;
-    if(points >= 8){
-      showSpark("🏆 أسطوري!");
-      soundWin();
-    } else if(points >= 6){
-      showSpark("🌟 ممتاز!");
-      soundOk();
+    if(isCorrect){
+      points += 2;
+      showToast("ok", "صح ✅");
     } else {
-      showSpark("💪 جرّب مرة ثانية!");
+      showToast("no", "خطأ ❌");
     }
 
-    setView(resultView);
+    setTimeout(() => nextQuestion(isCorrect, false), 550);
   }
 
-  function nextQuestion(wasCorrect, wasTimeout=false){
-    const q = questions[idx];
-
-    if(wasTimeout){
-      q.timeout = true;
-      q.correct = false;
-      showToast("warn", "انتهى الوقت ⏱️ (راح ننتقل للسؤال اللي بعده)");
-      soundNo();
-    } else if(wasCorrect){
-      q.correct = true;
-      points += 2;
-      showToast("ok", "صح! +2 ✅");
-      soundOk();
-    } else {
-      q.correct = false;
-      showToast("no", "خطأ ❌");
-      soundNo();
-    }
-
+  function nextQuestion(wasCorrect, wasTimeout){
     idx += 1;
     if(idx >= Q_COUNT){
       finishRound();
@@ -821,84 +718,46 @@
     }
   }
 
-  function submitAnswer(){
-    if(!currentChar) return;
-
-    const q = questions[idx];
-    const val = answerInput.value.trim();
-    const userAns = val === "" ? null : Number(val);
-
-    // Save attempt
-    q.userAns = userAns;
-
-    if(userAns === q.answer){
-      stopTimer();
-      nextQuestion(true, false);
-      return;
-    }
-
-    // Wrong answer: allow a second try if time remains
-    wrongAttemptsThisQ += 1;
-    if(wrongAttemptsThisQ < 2 && secLeft > 0){
-      showToast("warn", "قريب! جرّب مرة ثانية بسرعة ✨");
-      soundNo();
-      answerInput.select();
-      answerInput.focus();
-      return;
-    }
-
-    // Otherwise move on
+  function finishRound(){
     stopTimer();
-    nextQuestion(false, false);
-  }
+    const name = CHAR[currentChar].name;
+    resultTitle.textContent = `انتهت جولة ${name} 🎉`;
+    resultSub.textContent = `درجتك: ${toArabicIndic(points)} من ${toArabicIndic(10)} (وقت السؤال: ${toArabicIndic(secPerQ)} ث)`;
 
-  function skipQuestion(){
-    if(!currentChar) return;
-    const q = questions[idx];
-    q.userAns = null;
-    stopTimer();
-    nextQuestion(false, false);
+    // Save
+    const scores = loadScores();
+    scores[currentChar] = { last: points, time: secPerQ, updatedAt: Date.now() };
+    scores.updatedAt = Date.now();
+    saveScores(scores);
+
+    refreshBoard();
+    pillStatus.firstChild.textContent = `تم تسجيل نتيجة ${name}: ${toArabicIndic(points)}/${toArabicIndic(10)} ✅ `;
+    setView(resultView);
   }
 
   function refreshBoard(){
-    const st = loadState();
-    const s = (st.scores || {});
+    const scores = loadScores();
+    const vMoh  = scores.mohammed?.last ?? null;
+    const vAsia = scores.asia?.last ?? null;
+    const vSal  = scores.salsabil?.last ?? null;
 
-    function fmt(key){
-      const e = s[key];
-      if(!e) return "—";
-      return `آخر: ${e.last}/10 | أفضل: ${e.best}/10`;
-    }
-    function badgeFmt(key){
-      const e = s[key];
-      if(!e) return "لم يلعب";
-      return `${e.last}/10 (أفضل ${e.best}/10)`;
-    }
+    function fmt(v){ return v === null ? "—" : `${toArabicIndic(v)}/${toArabicIndic(10)}`; }
 
-    scoreMoh.textContent  = fmt("mohammed");
-    scoreAsia.textContent = fmt("asia");
-    scoreSal.textContent  = fmt("salsabil");
+    scoreMoh.textContent  = fmt(vMoh);
+    scoreAsia.textContent = fmt(vAsia);
+    scoreSal.textContent  = fmt(vSal);
 
-    badgeMoh.textContent  = badgeFmt("mohammed");
-    badgeAsia.textContent = badgeFmt("asia");
-    badgeSal.textContent  = badgeFmt("salsabil");
+    badgeMoh.textContent  = vMoh  === null ? "لم يلعب" : fmt(vMoh);
+    badgeAsia.textContent = vAsia === null ? "لم تلعب" : fmt(vAsia);
+    badgeSal.textContent  = vSal  === null ? "لم تلعب" : fmt(vSal);
 
-    modeM.textContent = s.mohammed?.modeLabel || "—";
-    modeA.textContent = s.asia?.modeLabel || "—";
-    modeS.textContent = s.salsabil?.modeLabel || "—";
-
-    // ranking by LAST result (not best), only if all have last
-    const m = s.mohammed?.last;
-    const a = s.asia?.last;
-    const b = s.salsabil?.last;
-    const allDone = [m,a,b].every(v => typeof v === "number");
-
+    const allDone = [vMoh, vAsia, vSal].every(v => typeof v === "number");
     if(allDone){
       const arr = [
-        { key:"mohammed", name:"محمد", score:m },
-        { key:"asia", name:"آسية", score:a },
-        { key:"salsabil", name:"سلسبيل", score:b },
-      ].sort((x,y) => y.score - x.score);
+        { key:"mohammed", name:"محمد", score:vMoh },
+        { key:"asia", name:"آسية", score:vAsia },
+        { key:"salsabil", name:"سلسبيل", score:vSal },
+      ].sort((a,b) => b.score - a.score);
 
       rankList.innerHTML = "";
       arr.forEach((it, i) => {
@@ -906,10 +765,10 @@
         div.className = "rankItem";
         div.innerHTML = `
           <div style="display:flex;align-items:center;gap:10px">
-            <div class="pos">${i+1}</div>
+            <div class="pos">${toArabicIndic(i+1)}</div>
             <div>${it.name}</div>
           </div>
-          <div>${it.score}/10</div>
+          <div>${toArabicIndic(it.score)}/${toArabicIndic(10)}</div>
         `;
         rankList.appendChild(div);
       });
@@ -919,10 +778,6 @@
       rankBox.classList.add("hidden");
       rankList.innerHTML = "";
     }
-
-    // update pill info
-    pillDiff.textContent = `الصعوبة: ${DIFF[currentDiff].label}`;
-    pillSound.textContent = `الصوت: ${soundOn ? "تشغيل" : "إيقاف"}`;
   }
 
   function goHome(){
@@ -931,9 +786,6 @@
     questions = [];
     idx = 0;
     points = 0;
-
-    mainTitle.textContent = "الصفحة الرئيسية";
-    mainDesc.textContent = "اختر شخصية لبدء التحدّي. تقدر تغيّر الصعوبة وتشغّل/تطفي الصوت.";
     pillStatus.firstChild.textContent = "جاهزين؟ اختر شخصية وابدأ 👇 ";
     setView(homeView);
   }
@@ -942,50 +794,29 @@
     stopTimer();
     localStorage.removeItem(storageKey);
     refreshBoard();
-    showSpark("✅ تم التصفير");
-    pillStatus.firstChild.textContent = "تم تصفير النتائج ✅ ";
     goHome();
+    pillStatus.firstChild.textContent = "تم تصفير النتائج ✅ ";
   }
 
-  // ========== Events ==========
+  // ======= Events =======
   document.querySelectorAll(".char").forEach(el => {
     el.addEventListener("click", () => {
-      // unlock audio on first interaction (best for mobile)
-      ensureAudio();
       const key = el.getAttribute("data-char");
       startRound(key);
     });
   });
 
-  Object.keys(diffBtns).forEach(k => {
-    diffBtns[k].addEventListener("click", () => setDifficulty(k));
+  Object.values(timeBtns).forEach(btn => {
+    btn.addEventListener("click", () => setTimePerQuestion(Number(btn.dataset.time)));
   });
 
-  btnSubmit.addEventListener("click", submitAnswer);
-  btnSkip.addEventListener("click", skipQuestion);
   btnBack.addEventListener("click", goHome);
   btnHome.addEventListener("click", goHome);
+  btnToHome2.addEventListener("click", goHome);
   btnReset.addEventListener("click", resetAll);
 
-  btnToggleSound.addEventListener("click", () => {
-    setSound(!soundOn);
-    showSpark(soundOn ? "🔊 الصوت شغال" : "🔇 الصوت مطفي");
-  });
-
-  btnPlayAgain.addEventListener("click", () => {
-    if(!currentChar){ goHome(); return; }
-    startRound(currentChar);
-  });
-
-  btnToHome2.addEventListener("click", goHome);
-
-  answerInput.addEventListener("keydown", (e) => {
-    if(e.key === "Enter") submitAnswer();
-  });
-
-  // ========== Init ==========
-  setSound(true);
-  setDifficulty("easy");
+  // ======= Init =======
+  setTimePerQuestion(10);
   refreshBoard();
 })();
 </script>
